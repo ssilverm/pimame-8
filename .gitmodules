@@ -1,0 +1,6 @@
+[submodule "pimame-web-frontend"]
+	path = pimame-web-frontend
+	url = https://github.com/ssilverm/pimame-web-frontend
+[submodule "pimame-menu"]
+	path = pimame-menu
+	url = https://github.com/ssilverm/pimame-menu
