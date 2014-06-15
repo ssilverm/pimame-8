@@ -4,3 +4,9 @@
 [submodule "pimame-menu"]
 	path = pimame-menu
 	url = https://github.com/ssilverm/pimame-menu
+[submodule "dispmanx"]
+	path = dispmanx
+	url = https://github.com/ssilverm/SDL12-kms-dispmanx
+[submodule "controller-setup"]
+	path = controller-setup
+	url = https://github.com/ssilverm/controller-setup
