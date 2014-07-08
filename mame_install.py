@@ -58,7 +58,7 @@ for x in found_lines:
         if "No" in config_file[x + 1]: 
             print "Making Item Visible"
             config_file[x + 1] = config_file[x + 1].replace("No","Yes")
-        if "Yes" in config_file[x + 1]: 
+        elif "Yes" in config_file[x + 1]: 
             print "Making Item Invisible"
             config_file[x + 1] = config_file[x + 1].replace("Yes","No")
 
