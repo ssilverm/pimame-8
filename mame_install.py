@@ -1,5 +1,23 @@
 # Import the module
 import subprocess
+import sys
+import requests
+
+def connected_to_internet(url='http://piplay.org/', timeout=5):
+    try:
+        _ = requests.get(url, timeout=timeout)
+        return True
+    except requests.ConnectionError:
+        print("No internet connection available.")
+    return False
+
+connection = connected_to_internet();
+
+if connection:
+	print "Connection Established"
+else:
+	print "Could not connect to the internet/piplay.org"
+	sys.exit()
 
 print "Downloading and Installing MAME"
 
