@@ -43,6 +43,12 @@ mkdir /home/pi/pimame/emulators/mame4all-pi/
 cp mame4all-pi/mame4all_pi.zip /home/pi/pimame/emulators/mame4all-pi/
 cd /home/pi/pimame/emulators/mame4all-pi/
 unzip -o mame4all_pi.zip
+cd /home/pi/pimame/roms/
+mv mame4all mame4all-old
+ln -s /home/pi/pimame/emulators/mame4all-pi/roms /home/pi/pimame/roms/mame4all
+mv mame4all-old/* mame4all/
+rmdir mame4all-old
+
 cd /home/pi/pimame
 rm -rf mame4all-pi/
 
