@@ -8,6 +8,12 @@ echo "Please enter your WiFi SSID: "
 read ssid
 echo "Please enter your password:"
 read psk
+echo "Please enter your encryption protocol - TKIP or CCMP:"
+echo "Generally CCMP is WPA2 and TKIP is WPA1. If in doubt, try TKIP first."
+read encryption
+echo "Please enter the protocol - RSN or WPA:"
+echo "Could be either RSN (WPA2) or WPA (WPA1)"
+read proto
 
 /bin/cat <<EOM >$INTERFACES
 auto wlan0
@@ -26,11 +32,13 @@ update_config=1
 network={
 ssid="$ssid"
 psk="$psk"
-proto=RSN
+proto=$proto
 key_mgmt=WPA-PSK
-pairwise=CCMP
+pairwise=$encryption
 auth_alg=OPEN
 }
 EOM
 export WIFINAME=$ssid
+
+echo "WiFi Successfully Setup! Reboot to test changes."
 
