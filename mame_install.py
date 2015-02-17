@@ -2,6 +2,7 @@
 import subprocess
 import sys
 import requests
+import sqlite3
 
 def connected_to_internet(url='http://piplay.org/', timeout=5):
     try:
@@ -14,10 +15,10 @@ def connected_to_internet(url='http://piplay.org/', timeout=5):
 connection = connected_to_internet();
 
 if connection:
-	print "Connection Established"
+    print "Connection Established"
 else:
-	print "Could not connect to the internet/piplay.org"
-	sys.exit()
+    print "Could not connect to the internet/piplay.org"
+    sys.exit()
 
 print "Downloading and Installing MAME"
 
@@ -43,10 +44,11 @@ mkdir /home/pi/pimame/emulators/mame4all-pi/
 cp mame4all-pi/mame4all_pi.zip /home/pi/pimame/emulators/mame4all-pi/
 cd /home/pi/pimame/emulators/mame4all-pi/
 unzip -o mame4all_pi.zip
-rm -rf /home/pi/pimame/emulators/mame4all-pi/roms
-ln -s /home/pi/pimame/roms/mame4all /home/pi/pimame/emulators/mame4all-pi/roms
+rm -rf ./roms
+ln -s /home/pi/pimame/roms/mame4all/ roms
 cd /home/pi/pimame
 rm -rf mame4all-pi/
+
 ####MAME END#########
 cd /home/pi/pimame/pimame-menu/
 '''
@@ -54,36 +56,14 @@ cd /home/pi/pimame/pimame-menu/
 # Set up the echo command and direct the output to a pipe
 subprocess.call(download_and_install, shell=True)
 
-print "Updating PiPlay Configuration File"
-f = open('/home/pi/pimame/pimame-menu/config.yaml', 'r')
-config_file = f.readlines()
+print "Updating PiPlay Database"
+conn = sqlite3.connect('/home/pi/pimame/pimame-menu/database/config.db')
+c = conn.cursor()
 
-#print config_file
-found_lines = []
-count = 0
-for x in config_file:
-    if "AdvMAME" in x:
-        found_lines.append(count)
-    if "MAME4All" in x:
-        found_lines.append(count)
-    if "Install MAME" in x:
-        found_lines.append(count)
-    count += 1
+c.execute('UPDATE menu_items SET visible = 1 where icon_id = "M4A" OR icon_id = "ADVM"')
+c.execute('UPDATE menu_items SET visible = 0 where icon_id = "INSTALLMAME"')
+conn.commit()
 
-#print found_lines, count
 
-for x in found_lines:
-    if "visible" in config_file[x + 1]:
-        if "No" in config_file[x + 1]: 
-            print "Making Item Visible"
-            config_file[x + 1] = config_file[x + 1].replace("No","Yes")
-        elif "Yes" in config_file[x + 1]: 
-            print "Making Item Invisible"
-            config_file[x + 1] = config_file[x + 1].replace("Yes","No")
-
-f = open('/home/pi/pimame/pimame-menu/config.yaml', 'w')
-for item in config_file:
-    f.write("%s" % item)
 
 print "All Finished!"
-
