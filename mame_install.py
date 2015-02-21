@@ -39,7 +39,9 @@ rm advancemess_0.102.0.1-1_armhf.deb
 
 ###mame4all
 cd /home/pi/pimame
-git clone https://code.google.com/p/mame4all-pi/
+
+wget http://downloads.sourceforge.net/project/mame4allpi/mame4all_pi.zip
+#git clone https://code.google.com/p/mame4all-pi/
 mkdir /home/pi/pimame/emulators/mame4all-pi/
 cp mame4all-pi/mame4all_pi.zip /home/pi/pimame/emulators/mame4all-pi/
 cd /home/pi/pimame/emulators/mame4all-pi/
