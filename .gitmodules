@@ -10,3 +10,9 @@
 [submodule "controller-setup"]
 	path = controller-setup
 	url = https://github.com/ssilverm/controller-setup
+[submodule "emulators-piplay"]
+	path = emulators-piplay
+	url = https://github.com/ssilverm/emulators-piplay
+[submodule "emulators"]
+	path = emulators
+	url = https://github.com/ssilverm/emulators-piplay
