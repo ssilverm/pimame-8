@@ -16,3 +16,6 @@
 [submodule "emulators"]
 	path = emulators
 	url = https://github.com/ssilverm/emulators-piplay
+[submodule "file_watcher"]
+	path = file_watcher
+	url = https://github.com/mholgatem/file_watcher
