@@ -19,3 +19,6 @@
 [submodule "file_watcher"]
 	path = file_watcher
 	url = https://github.com/mholgatem/file_watcher
+[submodule "supervisor_scripts"]
+	path = supervisor_scripts
+	url = https://github.com/ssilverm/supervisor_scripts
