@@ -15,7 +15,7 @@ echo "Please enter the protocol - RSN or WPA:"
 echo "Could be either RSN (WPA2) or WPA (WPA1)"
 read proto
 
-/bin/cat <<EOM >$INTERFACES
+sudo sh -c "/bin/cat <<EOM >$INTERFACES
 auto wlan0
 iface lo inet loopback
 iface eth0 inet dhcp
@@ -23,9 +23,9 @@ allow-hotplug wlan0
 iface wlan0 inet dhcp
 wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 iface default inet dhcp
-EOM
+EOM"
 
-/bin/cat <<EOM >$WPA
+sudo sh -c "/bin/cat <<EOM >$WPA
 # /etc/wpa_supplicant/wpa_supplicant.conf
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
@@ -37,7 +37,7 @@ key_mgmt=WPA-PSK
 pairwise=$encryption
 auth_alg=OPEN
 }
-EOM
+EOM"
 export WIFINAME=$ssid
 
 echo "WiFi Successfully Setup! Reboot to test changes."
